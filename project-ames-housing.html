@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Predicting House Prices – Project Details</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Extra styling just for this page (optional) */
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .screenshot-card {
+      background: #020617;
+      border-radius: 0.75rem;
+      border: 1px solid #1f2937;
+      overflow: hidden;
+      box-shadow: 0 18px 30px rgba(15, 23, 42, 0.7);
+    }
+
+    .screenshot-card img {
+      width: 100%;
+      display: block;
+    }
+
+    .screenshot-card p {
+      margin: 0;
+      padding: 0.75rem 0.9rem 0.9rem;
+      font-size: 0.9rem;
+      color: #d1d5db;
+    }
+
+    .link-list li {
+      margin-bottom: 0.25rem;
+    }
+
+    .pill-link {
+      display: inline-block;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid #1d4ed8;
+      color: #bfdbfe;
+      text-decoration: none;
+      font-size: 0.85rem;
+      margin-right: 0.5rem;
+    }
+
+    .pill-link:hover {
+      background: #1d4ed8;
+      color: #f9fafb;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Jenny Hoang</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="projects.html">Projects</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- Intro -->
+  <section>
+    <h2>🏡 Predicting House Prices Using Ames Housing Data</h2>
+    <p>
+      This project explores how different types of square footage influence house sale prices.
+      I worked on this project in my free time as part of my journey into the data world, and 
+      it represents my first complete end-to-end machine learning workflow—from loading real data
+      all the way to training, evaluating, and interpreting a model.
+    </p>
+  </section>
+
+  <!-- Links: Colab, GitHub, Dataset -->
+  <section>
+    <h3>Notebook, Code & Dataset</h3>
+    <ul class="link-list">
+      <li>
+        <strong>Colab Notebook:</strong>
+        <a class="pill-link" href="https://colab.research.google.com/drive/1Yz6gncs0thiW8X7lkJPxfh-HGpgKxc8M?usp=sharing" target="_blank">
+          🔗 Open in Google Colab
+        </a>
+      </li>
+      <li>
+        <strong>Dataset:</strong>
+        <a href="https://raw.githubusercontent.com/twiradinata/datasets/main/AmesHousing_simple.csv" target="_blank">
+          AmesHousing_simple.csv
+        </a>
+      </li>
+    </ul>
+    <p style="font-size: 0.9rem; color: #9ca3af;">
+      In the Colab notebook, you can see all the code, outputs, and step-by-step process behind this project.
+    </p>
+  </section>
+
+  <!-- Project Overview -->
+  <section>
+    <h3>Project Overview</h3>
+    <p>
+      The goal of this project was to build a simple, interpretable model that can predict house prices 
+      using a subset of variables from the Ames Housing dataset. Instead of using every possible feature, 
+      I focused on a small group of meaningful square footage features to keep the project clear and 
+      beginner-friendly.
+    </p>
+    <p>
+      This project helped me practice working with real data, understand the modeling process, and 
+      start building confidence in my ability to ask questions and find answers using data.
+    </p>
+  </section>
+
+  <!-- Dataset details -->
+  <section>
+    <h3>Dataset</h3>
+    <ul>
+      <li><strong>Source:</strong> 
+        <a href="https://raw.githubusercontent.com/twiradinata/datasets/main/AmesHousing_simple.csv" target="_blank">
+          AmesHousing_simple.csv
+        </a>
+      </li>
+      <li><strong>Target variable:</strong> <code>SalePrice</code> (house sale price)</li>
+      <li><strong>Selected features:</strong>
+        <ul>
+          <li><code>BsmtFin SF 1</code> – finished basement square footage</li>
+          <li><code>Bsmt Unf SF</code> – unfinished basement square footage</li>
+          <li><code>Total Bsmt SF</code> – total basement area</li>
+          <li><code>1st Flr SF</code> – first floor square footage</li>
+          <li><code>2nd Flr SF</code> – second floor square footage</li>
+          <li><code>Gr Liv Area</code> – above-ground living area</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Process -->
+  <section>
+    <h3>Process & Approach</h3>
+    <ul>
+      <li>Loaded the dataset into a Google Colab notebook using <code>pandas.read_csv()</code>.</li>
+      <li>Explored the data with <code>df.head()</code>, <code>df.info()</code>, and <code>df.describe()</code>.</li>
+      <li>Checked for missing values and confirmed the data was mostly clean.</li>
+      <li>Visualized relationships between square footage and price using histograms and scatterplots.</li>
+      <li>Selected a small set of interpretable features focused on different types of space in the home.</li>
+      <li>Split the data into training and test sets using <code>train_test_split</code>.</li>
+      <li>Trained a linear regression model to predict <code>SalePrice</code>.</li>
+      <li>Evaluated the model using Mean Squared Error and a predicted vs actual price scatter plot.</li>
+      <li>Interpreted the model coefficients to understand which features mattered most.</li>
+    </ul>
+  </section>
+
+  <!-- Key Findings -->
+  <section>
+    <h3>Key Findings</h3>
+    <ul>
+      <li>
+        <strong>Above-ground living space (1st and 2nd floor)</strong> had the strongest impact on price.
+        The coefficients suggested that each additional square foot on these floors added over \$120 
+        to the predicted sale price.
+      </li>
+      <li>
+        <strong>Basement space</strong> also increased house value, but less than the main living areas. 
+        Finished basement space was more valuable than unfinished space.
+      </li>
+      <li>
+        <strong>Multicollinearity</strong> appeared between <code>Gr Liv Area</code> and the individual 
+        floor features. Because they contain overlapping information, one of the coefficients appeared 
+        negative even though more living area clearly increases price. This taught me an important lesson 
+        about being careful when including highly correlated features in the same model.
+      </li>
+      <li>
+        Even a simple linear model can provide useful insights about which features matter most, as long as 
+        you choose interpretable variables and think carefully about the results.
+      </li>
+    </ul>
+  </section>
+
+  <!-- Screenshots -->
+  <section>
+    <h3>Screenshots</h3>
+    <p>
+      Here are a few visual snapshots from the notebook, showing parts of the analysis and model evaluation.
+    </p>
+
+    <div class="screenshot-grid">
+      <!-- Screenshot 1 -->
+      <div class="screenshot-card">
+        <img src="screenshot-ames-distribution.png" alt="Distribution of house prices screenshot" />
+        <p>Price distribution: visualizing the spread of <code>SalePrice</code>.</p>
+      </div>
+
+      <!-- Screenshot 2 -->
+      <div class="screenshot-card">
+        <img src="screenshot-ames-scatter.png" alt="Scatter plot of living area vs price" />
+        <p>Scatter plot of living area vs. sale price, showing a positive relationship.</p>
+      </div>
+
+      <!-- Screenshot 3 -->
+      <div class="screenshot-card">
+        <img src="screenshot-ames-pred-vs-actual.png" alt="Predicted vs actual prices plot" />
+        <p>Predicted vs. actual prices from the linear regression model.</p>
+      </div>
+    </div>
+
+    <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 0.8rem;">
+      Note: The images above are static exports from my Colab notebook. The full interactive version is available in the notebook link at the top of this page.
+    </p>
+  </section>
+
+  <!-- Skills learned -->
+  <section>
+    <h3>Skills & Tools Learned</h3>
+    <p>Through this project, I practiced and reinforced the following skills:</p>
+    <ul>
+      <li>Loading and working with real-world tabular data in <strong>Python</strong> using <strong>Pandas</strong>.</li>
+      <li>Performing basic Exploratory Data Analysis (EDA) with summary statistics and visualizations.</li>
+      <li>Building and evaluating a <strong>linear regression</strong> model using <strong>scikit-learn</strong>.</li>
+      <li>Understanding and interpreting model coefficients in the context of real business questions.</li>
+      <li>Recognizing issues like multicollinearity and thinking critically about model outputs.</li>
+      <li>Documenting my work and findings in a structured, storytelling format.</li>
+    </ul>
+  </section>
+
+  <!-- Next steps -->
+  <section>
+    <h3>Links & Next Steps</h3>
+    <ul>
+      <li>
+        <strong>Notebook / Code:</strong>
+        <a href="YOUR_COLAB_LINK_HERE" target="_blank">Open the Colab notebook</a>
+        (and GitHub link once available).
+      </li>
+      <li>
+        <strong>Next steps:</strong> experiment with additional features, try regularization methods, 
+        or compare linear regression with other models like random forests.
+      </li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  © <span id="year"></span> Jenny Hoang
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
