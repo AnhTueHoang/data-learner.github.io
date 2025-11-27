@@ -70,3 +70,22 @@ footer {
   padding-bottom: 2rem;
 }
 
+.project-card {
+  cursor: pointer;
+  transition: transform 0.08s ease-out, box-shadow 0.1s ease-out, border-color 0.1s ease-out;
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 24px 45px rgba(15, 23, 42, 0.9);
+  border-color: #2563eb;
+}
+
+.project-card h3 a {
+  color: #bfdbfe;
+  text-decoration: none;
+}
+
+.project-card h3 a:hover {
+  text-decoration: underline;
+}
