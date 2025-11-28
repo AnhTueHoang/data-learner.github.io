@@ -2,13 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Jenny Hoang – Portfolio</title>
+  <title>Jenny Hoang – Data Portfolio</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
 <header>
-  <h1>Jenny Hoang</h1>
+  <div>
+    <h1>Jenny Hoang</h1>
+    <div class="brand-sub">Data & Analytics Portfolio</div>
+  </div>
   <nav>
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
@@ -17,17 +20,50 @@
 </header>
 
 <main>
-  <section>
-    <h2>Welcome!</h2>
-    <p>
-      This is my personal data and analytics portfolio.  
-      I use this website to showcase the projects I build as I continue learning 
-      data analysis, programming, machine learning, and other technical tools.
-    </p>
-    <p>
-      Over time, this site will grow with more projects, case studies, and tools that I learn.
-      Feel free to explore my work or learn more about me.
-    </p>
+  <section class="hero">
+    <div>
+      <h2 class="hero-title">
+        Exploring data, learning out loud, <span class="hero-accent">one project at a time.</span>
+      </h2>
+      <p class="hero-subtitle">
+        I’m building my skills in data analysis and machine learning by working on real projects 
+        in my free time. This site is where I share what I’m learning and the stories I discover 
+        behind the datasets.
+      </p>
+
+      <div class="hero-badges">
+        <span class="hero-badge">Beginner → Data Professional</span>
+        <span class="hero-badge">End-to-end projects</span>
+      </div>
+
+      <div style="margin-top: 0.9rem;">
+        <a class="button-link" href="https://github.com/AnhTueHoang/data-learner.github.io" target="_blank">
+          <span>🌐 Visit my GitHub</span>
+        </a>
+        <a class="button-link" href="projects.html" style="margin-left: 0.4rem;">
+          📂 View my projects
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <p style="font-size: 0.9rem; color: #9ca3af; margin-bottom: 0.6rem;">
+        Highlighted project
+      </p>
+      <div class="project-card" onclick="window.location='project-ames-housing.html'">
+        <div class="project-meta">Machine Learning • Regression</div>
+        <h3><a href="project-ames-housing.html">Predicting House Prices with Ames Housing Data</a></h3>
+        <p style="font-size: 0.9rem;">
+          A complete beginner-friendly project where I use housing square footage to predict 
+          sale prices and interpret which spaces add the most value.
+        </p>
+        <div style="margin-top: 0.4rem;">
+          <span class="tag">Python</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">Scikit-learn</span>
+        </div>
+      </div>
+    </div>
   </section>
 </main>
 
@@ -41,4 +77,3 @@
 
 </body>
 </html>
-
