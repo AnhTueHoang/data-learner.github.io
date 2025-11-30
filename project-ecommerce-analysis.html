@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>E-commerce Sales Insights – Project Details</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .screenshot-card {
+      background: #020617;
+      border-radius: 0.75rem;
+      border: 1px solid #1f2937;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.9);
+    }
+    .screenshot-card img {
+      width: 100%;
+      display: block;
+    }
+    .screenshot-card p {
+      padding: 0.75rem;
+      font-size: 0.88rem;
+      color: #d1d5db;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div>
+    <h1>Jenny Hoang</h1>
+    <div class="brand-sub">Data & Analytics Portfolio</div>
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="projects.html">Projects</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- Title -->
+  <section>
+    <h2>🛒 E-commerce Sales Insights & Customer Behavior Analysis</h2>
+    <p>
+      This project analyzes customer purchasing behavior using a real e-commerce dataset.
+      Through exploratory data analysis (EDA), I uncovered insights around revenue drivers,
+      product category performance, age-based customer behavior, payment preferences,
+      and satisfaction ratings.
+    </p>
+  </section>
+
+  <!-- Links -->
+  <section>
+    <h3>Notebook, Code & Dataset</h3>
+    <ul>
+      <li>
+        <strong>Colab Notebook:</strong>
+        <a class="pill-link" href="https://colab.research.google.com/drive/1WwOoRRkPR_5GTI13ZxBa-ol9pTnp4NOR?usp=sharing" target="_blank">
+          🔗 Open in Google Colab
+        </a>
+      </li>
+      <li>
+        <strong>Dataset:</strong>
+        <a href="https://raw.githubusercontent.com/Drushti2706/Ecommerce-sales-dataset/main/ecommerce_sales_data.csv" 
+        target="_blank">
+          ecommerce_sales_data.csv
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Overview -->
+  <section>
+    <h3>Project Overview</h3>
+    <p>
+      The main goal of this project was to explore buying patterns and customer behavior in an 
+      e-commerce environment. Instead of building a predictive model, this project focuses on 
+      business insights and actionable analytics by exploring trends across product categories, cities,
+      age groups, payment methods, and ratings.
+    </p>
+  </section>
+
+  <!-- Key Questions -->
+  <section>
+    <h3>Business Questions Answered</h3>
+    <ul>
+      <li>Which product categories generate the most revenue?</li>
+      <li>Which cities contribute the most to sales?</li>
+      <li>Which age groups shop the most?</li>
+      <li>What are the most preferred payment methods?</li>
+      <li>How are customers rating their purchases?</li>
+      <li>Which categories have the highest vs. lowest satisfaction?</li>
+    </ul>
+  </section>
+
+  <!-- Findings -->
+  <section>
+    <h3>Key Findings</h3>
+    <ul>
+      <li>
+        <strong>Electronics generated the most revenue</strong> but received the 
+        <strong>lowest average rating (~2.4 stars)</strong>, indicating a quality or expectation gap.
+      </li>
+      <li>
+        <strong>Toys had the highest satisfaction (~3.8 stars)</strong> despite having lower sales,
+        likely due to simpler functionality and lower customer expectations.
+      </li>
+      <li>
+        <strong>Netbanking was the most commonly used payment method,</strong> followed closely by Cash on Delivery, UPI, 
+        and lastly, Credit Card — showing strong digital payment adoption. However, when making bigger purchases, customers still tend to use Credit cards, showing over $200k in revenue, despite the rise of online transactions.
+      </li>
+      <li>
+        Customers aged <strong>46-60</strong> made the most purchases, signaling a strong GenX buyer base.
+      </li>
+      <li>
+        City-level analysis showed clear differences in revenue contributions across locations, with Kolkata making the most in revenue of over $190k.
+      </li>
+      <li>
+        Ratings were centered around <strong>3 stars</strong>, suggesting many “neutral” or moderately satisfied customers.
+      </li>
+    </ul>
+  </section>
+
+  <!-- Screenshots -->
+  <section>
+    <h3>Visualizations</h3>
+    <p>Here are some visual snapshots from the analysis:</p>
+
+    <div class="screenshot-grid">
+
+      <div class="screenshot-card">
+        <img src="ecom-payment-method.png" />
+        <p>Payment method usage showing strong digital preference.</p>
+      </div>
+
+      <div class="screenshot-card">
+        <img src="ecom-rating-distribution.png" />
+        <p>Ratings cluster around 3 stars—neutral satisfaction baseline.</p>
+      </div>
+
+      <div class="screenshot-card">
+        <img src="ecom-category-rating.png" />
+        <p>Toys have the highest satisfaction, and Electronics have the lowest.</p>
+      </div>
+
+    </div>
+
+    <p style="color:#9ca3af; font-size:0.85rem; margin-top:0.8rem;">
+      *(Upload these images to your GitHub repo with the exact filenames above.)*
+    </p>
+  </section>
+
+  <!-- Skills -->
+  <section>
+    <h3>Skills & Tools Applied</h3>
+    <ul>
+      <li>Exploratory Data Analysis (EDA)</li>
+      <li>Pandas, NumPy, Seaborn, Matplotlib</li>
+      <li>Data cleaning, feature creation (Revenue, Age Group)</li>
+      <li>Business analytics and interpretation</li>
+      <li>Data storytelling and visualization</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  © <span id="year"></span> Jenny Hoang
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
