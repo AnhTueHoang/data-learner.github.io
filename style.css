@@ -19,6 +19,10 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: radial-gradient(circle at top left, #1f2937 0, #020617 45%, #000 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;   /* keeps it from “sliding” and looking like panels */
+  background-size: cover;   
 }
 
 /* ---- LAYOUT ---- */
@@ -86,7 +90,7 @@ main {
 /* ---- SECTIONS / CARDS ---- */
 
 section {
-  background: rgba(15, 23, 42, 0.9);
+  background: rgba(15, 23, 42, 0.92);
   border: 1px solid rgba(31, 41, 55, 0.9);
   border-radius: 1.3rem;
   padding: 1.8rem 1.6rem;
