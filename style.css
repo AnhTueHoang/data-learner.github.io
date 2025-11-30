@@ -19,7 +19,6 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: radial-gradient(circle at top left, #1f2937 0, #020617 45%, #000 100%);
   background-repeat: no-repeat;
   background-attachment: fixed;   /* keeps it from “sliding” and looking like panels */
   background-size: cover;   
