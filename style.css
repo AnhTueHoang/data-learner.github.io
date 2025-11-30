@@ -16,6 +16,7 @@ body {
   padding: 0;
   background: radial-gradient(circle at top left, #1f2937 0, #020617 45%, #000 100%);
   color: #e5e7eb;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -85,12 +86,12 @@ main {
 /* ---- SECTIONS / CARDS ---- */
 
 section {
-  background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.9));
+  background: rgba(15, 23, 42, 0.9);
   border: 1px solid rgba(31, 41, 55, 0.9);
   border-radius: 1.3rem;
   padding: 1.8rem 1.6rem;
   margin-bottom: 2.2rem;
-  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.9);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
 }
 
 h2 {
@@ -255,26 +256,6 @@ a:hover {
   font-size: 0.8rem;
   color: #9ca3af;
   margin-bottom: 0.5rem;
-}
-
-/* ---- PROJECT DETAIL PAGES: SMOOTH BACKGROUND ---- */
-
-.project-page section {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  padding: 1.2rem 0 1.8rem;
-  border-radius: 0;
-}
-
-.project-page section:first-of-type {
-  padding-top: 0;
-}
-
-.project-page section h2,
-.project-page section h3 {
-  /* keep headings bright so they still stand out */
-  color: #f9fafb;
 }
 
 /* ---- ABOUT PAGE: PROFILE ---- */
