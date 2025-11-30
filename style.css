@@ -257,6 +257,26 @@ a:hover {
   margin-bottom: 0.5rem;
 }
 
+/* ---- PROJECT DETAIL PAGES: SMOOTH BACKGROUND ---- */
+
+.project-page section {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 1.2rem 0 1.8rem;
+  border-radius: 0;
+}
+
+.project-page section:first-of-type {
+  padding-top: 0;
+}
+
+.project-page section h2,
+.project-page section h3 {
+  /* keep headings bright so they still stand out */
+  color: #f9fafb;
+}
+
 /* ---- ABOUT PAGE: PROFILE ---- */
 
 .about-layout {
