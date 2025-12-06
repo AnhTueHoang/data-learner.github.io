@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Customer Churn Prediction – Project Details</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .screenshot-card {
+      background: #020617;
+      border-radius: 0.75rem;
+      border: 1px solid #1f2937;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.9);
+    }
+    .screenshot-card img {
+      width: 100%;
+      display: block;
+    }
+    .screenshot-card p {
+      padding: 0.75rem;
+      font-size: 0.88rem;
+      color: #d1d5db;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div>
+    <h1>Jenny Hoang</h1>
+    <div class="brand-sub">Data & Analytics Portfolio</div>
+  </div>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../about.html">About</a>
+    <a href="../projects.html">Projects</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- Intro -->
+  <section>
+    <h2>📉 Customer Churn Prediction Using Telco Data</h2>
+    <p>
+      In this project, I built a classification model to predict which customers are at risk of leaving
+      a telecom service (churn). The goal is to help the business identify at-risk customers early,
+      so retention campaigns can be targeted more effectively.
+    </p>
+  </section>
+
+  <!-- Links -->
+  <section>
+    <h3>Notebook, Code & Dataset</h3>
+    <ul>
+      <li>
+        <strong>Colab Notebook:</strong>
+        <a class="pill-link" href="https://colab.research.google.com/drive/1DBvk50wOk9nw0QygEF3aNJ1-n7-erU4Y?usp=sharing" target="_blank">
+          🔗 Open in Google Colab
+        </a>
+      </li>
+      <li>
+        <strong>Dataset:</strong>
+        <a href="https://raw.githubusercontent.com/IBM/telco-customer-churn-on-icp4d/master/data/Telco-Customer-Churn.csv"
+           target="_blank">
+          Telco-Customer-Churn.csv
+        </a>
+      </li>
+    </ul>
+    <p style="font-size:0.9rem; color:#9ca3af;">
+      The notebook walks through data cleaning, exploratory analysis, feature engineering, model training,
+      and evaluation using scikit-learn.
+    </p>
+  </section>
+
+  <!-- Overview -->
+  <section>
+    <h3>Project Overview</h3>
+    <p>
+      The dataset contains information about telecom customers, including their demographics, and the services 
+      they subscribe to, contract type, billing information, and whether they have churned. 
+      I approached this as a supervised classification problem, where the target variable is
+      <code>Churn</code> (Yes/No).
+    </p>
+    <p>
+      My main goals were to:
+    </p>
+    <ul>
+      <li>Understand what types of customers are more likely to churn.</li>
+      <li>Build a predictive model that flags at-risk customers.</li>
+      <li>Translate model results into simple, business-friendly insights.</li>
+    </ul>
+  </section>
+
+  <!-- Dataset -->
+  <section>
+    <h3>Dataset & Features</h3>
+    <ul>
+      <li><strong>Rows:</strong> ~7,000 customers</li>
+      <li><strong>Target:</strong> <code>Churn</code> (Yes / No)</li>
+      <li><strong>Key features include:</strong>
+        <ul>
+          <li><code>gender</code>, <code>SeniorCitizen</code>, <code>Partner</code>, <code>Dependents</code></li>
+          <li><code>tenure</code> – months with the company</li>
+          <li><code>PhoneService</code>, <code>InternetService</code>, <code>StreamingTV</code>, etc.</li>
+          <li><code>Contract</code> – Month-to-month, One year, Two year</li>
+          <li><code>PaperlessBilling</code>, <code>PaymentMethod</code></li>
+          <li><code>MonthlyCharges</code>, <code>TotalCharges</code></li>
+        </ul>
+      </li>
+      <li>
+        Converted <code>TotalCharges</code> to numeric and filled missing values with the median to handle
+        data type inconsistencies.
+      </li>
+      <li>Removed <code>customerID</code> since it’s an identifier and not useful for prediction.</li>
+    </ul>
+  </section>
+
+  <!-- Process -->
+  <section>
+    <h3>Process & Approach</h3>
+    <ul>
+      <li>Loaded the Telco Customer Churn dataset into a Pandas DataFrame.</li>
+      <li>Cleaned the data by fixing the <code>TotalCharges</code> column and handling missing values.</li>
+      <li>Explored churn patterns using visualizations (e.g., churn distribution, tenure vs churn, 
+          contract type vs churn, monthly charges vs churn).</li>
+      <li>Separated the target variable <code>Churn</code> and encoded it as 0 (No) and 1 (Yes).</li>
+      <li>Split the dataset into training and test sets using an 80/20 split.</li>
+      <li>
+        Built a preprocessing pipeline using <code>ColumnTransformer</code> to:
+        <ul>
+          <li>Standardize numeric features: <code>tenure</code>, <code>MonthlyCharges</code>, <code>TotalCharges</code>.</li>
+          <li>One-hot encode categorical features (contract type, internet service, payment method, etc.).</li>
+        </ul>
+      </li>
+      <li>
+        Combined preprocessing with a <strong>Logistic Regression</strong> model in a single
+        scikit-learn <code>Pipeline</code>, ensuring consistent transformations for train and test data.
+      </li>
+      <li>Trained the model and evaluated it using accuracy, precision, recall, F1 score, and a confusion matrix.</li>
+    </ul>
+  </section>
+
+  <section>
+  <h3>Key Analytical Findings</h3>
+  <ul>
+    <li>
+      <strong>Class imbalance:</strong> About one-quarter of customers churned while the majority stayed. 
+      This makes churn a minority class, highlighting the challenge of accurately predicting it.
+    </li>
+
+    <li>
+      <strong>Tenure:</strong> Customers who churn typically have significantly shorter tenure. Many leave 
+      within their first 10 months, while customers who stay tend to have much longer relationships with 
+      the company.
+    </li>
+
+    <li>
+      <strong>Contract type:</strong> Month-to-month contracts show the highest churn rates, while one-year 
+      and two-year contracts are associated with much lower churn, indicating that contract commitment 
+      strongly reduces churn risk.
+    </li>
+
+    <li>
+      <strong>Monthly charges:</strong> Customers who churn tend to pay higher monthly charges. This suggests 
+      that expensive plans may feel less valuable or carry more financial risk, making customers more likely 
+      to leave.
+    </li>
+  </ul>
+</section>
+
+  <section>
+  <h3>Model Performance & Interpretation</h3>
+  <p>
+    I trained a Logistic Regression model using the preprocessed features and evaluated it on an 80/20 train-test split.
+    The model reached an overall <strong>accuracy of 82%</strong>. 
+    Because churn prediction is imbalanced, accuracy alone is not enough — so I evaluated precision, recall, and F1 score 
+    for the churn class specifically.
+  </p>
+
+  <ul>
+    <li>
+      <strong>Precision (churn = 1): 0.69</strong> — When the model predicts a customer will churn, it is correct 69% of the time.
+    </li>
+    <li>
+      <strong>Recall (churn = 1): 0.60</strong> — The model correctly identifies 60% of customers who actually churn.
+    </li>
+    <li>
+      <strong>F1 Score (churn = 1): 0.64</strong> — This reflects a balanced performance between precision and recall.
+    </li>
+    <li>
+      <strong>Precision (non-churn = 0): 0.86</strong> and 
+      <strong>Recall (non-churn = 0): 0.90</strong> — The model is very strong at identifying customers who stay.
+    </li>
+  </ul>
+
+  <p>
+    These results are typical for churn prediction problems, where the minority class (churners) is harder to identify.
+    The confusion matrix shows that the model correctly predicted most non-churners (934 true negatives) and several churners 
+    (223 true positives), but it still missed some churners (150 false negatives).
+  </p>
+
+  <p>
+    This indicates that although the model is a solid starting point, future improvements could focus on boosting recall for 
+    the churn class through class weighting, oversampling techniques, or trying more advanced algorithms like Random Forest 
+    or XGBoost.
+  </p>
+
+  <div class="screenshot-grid">
+    <div class="screenshot-card">
+      <img src="../images/confusion-matrix-churn.png" alt="Confusion matrix for churn model" />
+      <p>Confusion matrix showing model performance across churn and non-churn customers.</p>
+    </div>
+  </div>
+</section>
+
+  <!-- Screenshots -->
+  <section>
+    <h3>Visualizations</h3>
+    <p>Here are a few visual highlights from the notebook:</p>
+
+    <div class="screenshot-grid">
+      <div class="screenshot-card">
+        <img src="../images/churn-distribution.png" alt="Churn distribution bar chart" />
+        <p>Churn distribution showing that most customers stay, while a smaller portion churns.</p>
+      </div>
+
+      <div class="screenshot-card">
+        <img src="../images/tenure-vs-churn.png" alt="Tenure vs Churn boxplot" />
+        <p>Tenure vs churn: churners tend to have shorter tenure compared to non-churners.</p>
+      </div>
+
+      <div class="screenshot-card">
+        <img src="../images/confusion-matrix-churn.png" alt="Confusion matrix for churn model" />
+        <p>Confusion matrix for the logistic regression model on the test set.</p>
+      </div>
+    </div>
+
+    <p style="color:#9ca3af; font-size:0.85rem; margin-top:0.8rem;">
+      *Save your plots from Colab as PNG files and upload them to the <code>images</code> folder using these exact filenames:
+      <code>churn-distribution.png</code>, <code>tenure-vs-churn.png</code>, <code>confusion-matrix-churn.png</code>.*
+    </p>
+  </section>
+
+  <!-- Skills -->
+  <section>
+    <h3>Skills & Tools Applied</h3>
+    <ul>
+      <li>Supervised classification with <strong>Logistic Regression</strong>.</li>
+      <li>Data cleaning and type conversion in <strong>Pandas</strong>.</li>
+      <li>Exploratory Data Analysis (EDA) with <strong>Seaborn</strong> and <strong>Matplotlib</strong>.</li>
+      <li>Feature preprocessing with <strong>ColumnTransformer</strong> and <strong>OneHotEncoder</strong>.</li>
+      <li>Model evaluation using accuracy, precision, recall, F1 score, and confusion matrices.</li>
+      <li>Translating technical results into business insights focused on retention strategy.</li>
+    </ul>
+  </section>
+
+  <!-- Next Steps -->
+  <section>
+    <h3>Next Steps & Ideas</h3>
+    <ul>
+      <li>Experiment with tree-based models (e.g., Random Forest, XGBoost) to improve recall on churners.</li>
+      <li>Use class weighting or resampling techniques to handle the class imbalance better.</li>
+      <li>Analyze feature importance to see which services or combinations of features drive churn the most.</li>
+      <li>Build a simple dashboard or alert rule to surface the highest-risk customers for the business.</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  © <span id="year"></span> Jenny Hoang
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
