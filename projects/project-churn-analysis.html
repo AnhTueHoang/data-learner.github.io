@@ -3,30 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <title>Customer Churn Prediction – Project Details</title>
-  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../style.css?=v2" />
   <style>
     .screenshot-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1rem;
       margin-top: 1rem;
-    }
-    .screenshot-card {
-      background: #020617;
-      border-radius: 0.75rem;
-      border: 1px solid #1f2937;
-      overflow: hidden;
-      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.9);
-    }
-    .screenshot-card img {
-      width: 100%;
-      display: block;
-    }
-    .screenshot-card p {
-      padding: 0.75rem;
-      font-size: 0.88rem;
-      color: #d1d5db;
-      margin: 0;
     }
   </style>
 </head>
@@ -44,7 +27,7 @@
   </nav>
 </header>
 
-<main>
+<main class="full-size-images">
 
   <!-- Intro -->
   <section>
@@ -176,7 +159,7 @@
   </ul>
 </section>
 
-  <section>
+<section>
   <h3>Model Performance & Interpretation</h3>
   <p>
     I trained a Logistic Regression model using the preprocessed features and evaluated it on an 80/20 train-test split.
@@ -226,7 +209,7 @@
     <h3>Visualizations</h3>
     <p>Here are a few visual highlights from the notebook:</p>
 
-    <div class="screenshot-grid">
+    <div class="screenshot-grid side-by-side">
       <div class="screenshot-card">
         <img src="../images/churn-distribution.png" alt="Churn distribution bar chart" />
         <p>Churn distribution showing that most customers stay, while a smaller portion churns.</p>

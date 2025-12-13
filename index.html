@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>Jenny Hoang – Data Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?=v2" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
 
@@ -60,102 +61,11 @@
   © <span id="year"></span> Jenny Hoang
 </footer>
 
+<script src="js/projects-data.js"></script>
+<script src="js/render-projects.js"></script>
+
 <script>
-  // Set footer year
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  // ---- PROJECT DATA FOR "MOST RECENT WORK" CARD ----
-  // Add new projects here over time.
-  // The script will automatically pick the one with the latest "date" value.
-
-  const projects = [
-    {
-      id: "ames-housing",
-      title: "🏡 Predicting House Prices Using Ames Housing Data",
-      url: "projects/project-ames-housing.html",
-      type: "Machine Learning • Regression",
-      description:
-        "An end-to-end project where I predict house sale prices using different square footage features and interpret which types of space add the most value.",
-      tags: ["Python", "Pandas", "Scikit-learn"],
-      // Use ISO format: YYYY-MM-DD
-      date: "2025-11-29"
-    },
-    {
-      id: "ecommerce-analysis",
-      title: "🛒 E-commerce Sales Insights & Customer Behavior Analysis",
-      url: "projects/project-ecommerce-analysis.html",
-      type: "EDA • Business Insights",
-      description:
-        "Explored purchasing behavior, revenue trends, payment preferences, and customer satisfaction using a real e-commerce dataset.",
-      tags: ["Python", "Pandas", "Seaborn", "EDA"],
-      date: "2025-11-30" 
-    },
-    {
-      id: "customer-churn",
-      title: "📉 Customer Churn Prediction Using Telco Data",
-      url: "projects/project-churn-analysis.html",
-      type: "Classification • Machine Learning",
-      description:
-        "Built a churn prediction model using Logistic Regression to identify at-risk customers. Achieved 82% accuracy, 69% precision, and 60% recall on churners.",
-      tags: ["Python", "Pandas", "Scikit-learn", "EDA", "Classification"],
-      date: "2025-12-06" 
-    }
-    // Example for future projects:
-    // {
-    //   id: "customer-segmentation",
-    //   title: "🧩 Customer Segmentation with Clustering",
-    //   url: "projects/project-customer-segmentation.html",
-    //   type: "Unsupervised Learning • Clustering",
-    //   description:
-    //     "Using clustering methods to group customers by behavior and uncover patterns for marketing strategies.",
-    //   tags: ["Python", "Pandas", "Scikit-learn"],
-    //   date: "2025-04-15"
-    // }
-  ];
-
-  // Find the most recent project by date
-  function getMostRecentProject(projectList) {
-    if (!projectList.length) return null;
-    return projectList.reduce((latest, current) => {
-      return new Date(current.date) > new Date(latest.date) ? current : latest;
-    }, projectList[0]);
-  }
-
-  const mostRecent = getMostRecentProject(projects);
-  const recentContainer = document.getElementById("recent-project");
-
-  if (mostRecent && recentContainer) {
-    // Build the card HTML using your existing styles
-    recentContainer.innerHTML = `
-      <div class="project-card" onclick="window.location='${mostRecent.url}'">
-        <div class="project-meta">${mostRecent.type}</div>
-        <h3>
-          <a href="${mostRecent.url}">
-            ${mostRecent.title}
-          </a>
-        </h3>
-        <p style="font-size: 0.9rem;">
-          ${mostRecent.description}
-        </p>
-        <div style="margin-top: 0.4rem;">
-          ${mostRecent.tags
-            .map(tag => `<span class="tag">${tag}</span>`)
-            .join(" ")}
-        </div>
-      </div>
-    `;
-  } else if (recentContainer) {
-    // Fallback in case there are no projects defined
-    recentContainer.innerHTML = `
-      <div class="project-card">
-        <div class="project-meta">No projects yet</div>
-        <h3>More work coming soon</h3>
-        <p style="font-size: 0.9rem;">
-          Once I add projects to my portfolio, the most recent one will be highlighted here.
-        </p>
-      </div>
-    `;
-  }
+  renderMostRecentProject("recent-project");
 </script>
 
 </body>

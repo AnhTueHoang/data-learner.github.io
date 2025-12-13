@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Retail Sales Forecasting – Project Details</title>
+  <link rel="stylesheet" href="../style.css?=v2" />
+  <style>
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    code { color: #93c5fd; }
+  </style>
+</head>
+
+<body>
+<header>
+  <div>
+    <h1>Jenny Hoang</h1>
+    <div class="brand-sub">Data & Analytics Portfolio</div>
+  </div>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../about.html">About</a>
+    <a href="../projects.html">Projects</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- Intro -->
+  <section>
+    <h2>📈 Retail Sales Forecasting with Time Series Analysis</h2>
+    <p>
+      In this project, I analyzed monthly retail sales data to identify long-term trends and seasonal patterns.
+      I used time-series decomposition and moving averages to understand the structure of the data and prepare
+      for forecasting future sales.
+    </p>
+  </section>
+
+  <!-- Links -->
+  <section>
+    <h3>Notebook, Code & Dataset</h3>
+    <ul>
+      <li>
+        <strong>Colab Notebook:</strong>
+        <a class="pill-link" href="https://colab.research.google.com/drive/1htFr4WS-KvEsIhA-gY4tYU8-qh29kWHg?usp=sharing" target="_blank">🔗 Open in Google Colab</a>
+      </li>
+      <li>
+        <strong>Dataset:</strong>
+        <a href="https://raw.githubusercontent.com/jbrownlee/Datasets/master/monthly-car-sales.csv" target="_blank">
+          monthly-car-sales.csv
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Overview -->
+  <section>
+    <h3>Project Overview</h3>
+    <p>
+      The goal of this analysis is to understand how sales change over time and whether the data contains
+      repeatable patterns that support forecasting.
+    </p>
+    <ul>
+      <li>Is sales generally increasing or decreasing over time?</li>
+      <li>Is there repeating seasonality (peaks and dips each year)?</li>
+      <li>Are there unusual spikes or drops that stand out?</li>
+    </ul>
+  </section>
+
+  <!-- Process -->
+  <section>
+    <h3>Process & Approach</h3>
+    <ul>
+      <li>Loaded monthly sales data and converted the <code>Month</code> column to a datetime index.</li>
+      <li>Plotted the time series to visually inspect trend and volatility.</li>
+      <li>Used <code>seasonal_decompose</code> to separate the series into trend, seasonality, and residual noise.</li>
+      <li>Computed a 12-month moving average to smooth short-term fluctuations and highlight long-term direction.</li>
+    </ul>
+  </section>
+
+  <!-- Findings -->
+  <section>
+    <h3>Key Insights from Visual Analysis</h3>
+
+    <h4 style="margin-top: 1rem;">1) Overall Trend</h4>
+    <p>
+      Sales show a clear <strong>upward trend</strong> over time. This is visible in both the original time-series plot
+      and the 12-month moving average, which steadily increases through the years.
+    </p>
+
+    <h4 style="margin-top: 1rem;">2) Seasonality</h4>
+    <p>
+      The data shows <strong>strong yearly seasonality</strong>. Peaks and dips repeat at roughly the same time each year,
+      and the seasonal component from decomposition confirms a consistent pattern.
+    </p>
+
+    <h4 style="margin-top: 1rem;">3) Drops & Spikes</h4>
+    <p>
+      There are short-term spikes and dips, including a noticeable drop around <strong>1962–1963</strong>.
+      This period appears as a deviation from the typical pattern before sales recover later.
+      It may reflect external market uncertainty, but without additional economic indicators,
+      it should be treated as correlation rather than causation.
+    </p>
+  </section>
+
+  <!-- Screenshots -->
+  <section>
+    <h3>Visualizations</h3>
+    <p>Key plots from the notebook:</p>
+
+    <div class="screenshot-grid">
+      <div class="screenshot-card">
+        <img src="../images/retail-sales-over-time.png" alt="Monthly retail sales over time" />
+        <p>Monthly sales over time shows long-term growth and repeating cycles.</p>
+      </div>
+
+      <div class="screenshot-card">
+        <img src="../images/retail-decomposition.png" alt="Seasonal decomposition" />
+        <p>Decomposition separates trend, seasonality, and residual noise.</p>
+      </div>
+
+      <div class="screenshot-card">
+        <img src="../images/retail-12mo-moving-average.png" alt="12-month moving average" />
+        <p>12-month moving average smooths fluctuations and highlights the long-term trend.</p>
+      </div>
+    </div>
+
+    <p style="color:#9ca3af; font-size:0.85rem; margin-top:0.8rem;">
+      Note: The images above are static exports from my Colab notebook. The full interactive version is available in the notebook link at the top of this page.
+    </p>
+  </section>
+
+  <!-- Skills -->
+  <section>
+    <h3>Skills & Tools Applied</h3>
+    <ul>
+      <li>Time series analysis with Pandas datetime indexing</li>
+      <li>Trend & seasonality detection using seasonal decomposition</li>
+      <li>Smoothing with 12-month moving average</li>
+      <li>Matplotlib/Seaborn visualization and interpretation</li>
+      <li>Data storytelling (trend vs seasonality vs noise)</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  © <span id="year"></span> Jenny Hoang
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
