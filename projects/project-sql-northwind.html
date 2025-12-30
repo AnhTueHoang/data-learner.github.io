@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SQL Customer & Order Analysis – Northwind</title>
+
+  <link rel="stylesheet" href="../style.css" />
+
+  <style>
+    /* Only for this page */
+    .sql-block {
+      background: #020617;
+      border: 1px solid rgba(56, 189, 248, 0.18);
+      border-radius: 14px;
+      padding: 1rem 1.1rem;
+      overflow-x: auto;
+      margin-top: 0.75rem;
+      margin-bottom: 0.75rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+    }
+    .sql-block code {
+      color: #cbd5e1;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.92rem;
+      white-space: pre;
+      display: block;
+    }
+    .callout {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.22);
+      border-radius: 14px;
+      padding: 1rem 1.25rem;
+      margin-top: 1rem;
+    }
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .screenshot-card {
+      background: #020617;
+      border-radius: 0.75rem;
+      border: 1px solid #1f2937;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.9);
+    }
+    .screenshot-card img {
+      width: 100%;
+      display: block;
+      height: 220px;
+      object-fit: contain;
+      background: #020617;
+    }
+    .screenshot-card p {
+      padding: 0.75rem;
+      font-size: 0.88rem;
+      color: #d1d5db;
+      margin: 0;
+      line-height: 1.4;
+    }
+    .pill {
+      display: inline-block;
+      padding: 0.25rem 0.6rem;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 999px;
+      color: #dbeafe;
+      font-size: 0.85rem;
+      margin-right: 0.35rem;
+      margin-top: 0.25rem;
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div>
+    <h1>Jenny Hoang</h1>
+    <div class="brand-sub">Data & Analytics Portfolio</div>
+  </div>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../about.html">About</a>
+    <a href="../projects.html">Projects</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- Title -->
+  <section>
+    <h2>🧾 SQL Customer & Order Analysis (Northwind Database)</h2>
+    <p>
+      In this project, I used <strong>SQL (SQLite)</strong> to analyze customer purchasing behavior and revenue patterns
+      from the <strong>Northwind</strong> sample business database. The goal was to answer realistic stakeholder questions
+      such as: “Which categories generate the most revenue?”, “Who are our top customers?”, and “How concentrated is revenue?”
+    </p>
+
+    <div style="margin-top:0.75rem;">
+      <span class="pill">SQL</span>
+      <span class="pill">SQLite</span>
+      <span class="pill">Joins</span>
+      <span class="pill">CTEs</span>
+      <span class="pill">Window Functions</span>
+      <span class="pill">Business Analysis</span>
+    </div>
+  </section>
+
+  <!-- Links -->
+  <section>
+    <h3>Notebook, Database & Code</h3>
+    <ul>
+      <li>
+        <strong>Colab Notebook:</strong>
+        <a class="pill-link" href="https://colab.research.google.com/drive/1BgUhBNbmXN-T2LlmOCZu_h8IodEn5_Pm?usp=sharing" target="_blank">🔗 Open in Google Colab</a>
+      </li>
+      <li>
+        <strong>Database:</strong> Northwind SQLite sample database (downloaded and queried in Colab using <code>sqlite3</code>).
+      </li>
+    </ul>
+
+    <div class="callout">
+      <strong>Note on schema differences (debugging):</strong>
+      <p style="margin:0.45rem 0 0; color:#cbd5e1;">
+        This SQLite version of Northwind uses <code>Id</code> as the primary key in several tables (Customer, Order, Product, Category),
+        which differs from some tutorial schemas (e.g., CustomerID, OrderID). I inspected table structures and adjusted JOIN keys accordingly.
+      </p>
+    </div>
+  </section>
+
+  <!-- Schema -->
+  <section>
+    <h3>Database Schema (Tables Used)</h3>
+    <p>
+      I focused on the core commerce tables and their relationships:
+    </p>
+    <ul>
+      <li><strong>Customer</strong> → customer info</li>
+      <li><strong>Order</strong> → order header (who ordered + date)</li>
+      <li><strong>OrderDetail</strong> → line items (products, quantity, unit price, discount)</li>
+      <li><strong>Product</strong> → product info (links to Category)</li>
+      <li><strong>Category</strong> → product category</li>
+    </ul>
+
+    <div class="sql-block">
+      <code>
+Customer.Id → Order.CustomerID
+Order.Id → OrderDetail.OrderID
+Product.Id → OrderDetail.ProductID
+Category.Id → Product.CategoryID
+      </code>
+    </div>
+  </section>
+
+  <!-- Questions -->
+  <section>
+    <h3>Key Business Questions & SQL Approach</h3>
+
+    <h4>1) Which categories generate the most revenue?</h4>
+    <p>
+      I joined <code>OrderDetail → Product → Category</code> and calculated revenue using quantity, unit price, and discount.
+    </p>
+    <div class="sql-block">
+      <code>
+SELECT 
+  c.CategoryName,
+  ROUND(SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)), 2) AS revenue
+FROM OrderDetail od
+JOIN Product p ON od.ProductID = p.Id
+JOIN Category c ON p.CategoryID = c.Id
+GROUP BY c.CategoryName
+ORDER BY revenue DESC;
+      </code>
+    </div>
+
+    <h4>2) Who are the top 10 customers by total spending?</h4>
+    <p>
+      I linked customers to orders and order details to calculate total customer spend.
+    </p>
+    <div class="sql-block">
+      <code>
+SELECT 
+  cu.CompanyName,
+  ROUND(SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)), 2) AS total_spent
+FROM Customer cu
+JOIN "Order" o ON cu.Id = o.CustomerID
+JOIN OrderDetail od ON o.Id = od.OrderID
+GROUP BY cu.CompanyName
+ORDER BY total_spent DESC
+LIMIT 10;
+      </code>
+    </div>
+
+    <h4>3) Do we have more repeat customers or one-time customers?</h4>
+    <p>
+      I segmented customers into one-time vs repeat buyers by first calculating order counts per customer in a subquery, then classifying customers with a CASE statement and aggregating the results.
+    </p>
+    <div class="sql-block">
+      <code>
+SELECT
+  CASE
+    WHEN T1.order_count = 1 THEN 'One-time'
+    ELSE 'Repeat'
+  END AS customer_type,
+  COUNT(T1.CustomerID) AS num_customers
+FROM (
+  SELECT
+    cu.Id AS CustomerID,
+    COUNT(o.Id) AS order_count
+  FROM Customer cu
+  JOIN "Order" o ON cu.Id = o.CustomerID
+  GROUP BY cu.Id
+) AS T1
+GROUP BY customer_type;
+      </code>
+    </div>
+
+    <h4>4) How does revenue change month-to-month?</h4>
+    <p>
+      I grouped revenue by year-month using SQLite’s <code>strftime</code> function.
+    </p>
+    <div class="sql-block">
+      <code>
+SELECT 
+  strftime('%Y-%m', o.OrderDate) AS month,
+  ROUND(SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)), 2) AS revenue
+FROM "Order" o
+JOIN OrderDetail od ON o.Id = od.OrderID
+GROUP BY month
+ORDER BY month;
+      </code>
+    </div>
+
+    <h4>5) Which customers contribute the largest share of total revenue?</h4>
+    <p>
+      Using a CTE and window function, I calculated each customer’s percentage contribution to total revenue.
+    </p>
+    <div class="sql-block">
+      <code>
+WITH customer_revenue AS (
+  SELECT 
+    cu.CompanyName,
+    SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)) AS revenue
+  FROM Customer cu
+  JOIN "Order" o ON cu.Id = o.CustomerID
+  JOIN OrderDetail od ON o.Id = od.OrderID
+  GROUP BY cu.CompanyName
+)
+SELECT 
+  CompanyName,
+  ROUND(revenue, 2) AS revenue,
+  ROUND(100.0 * revenue / SUM(revenue) OVER (), 2) AS pct_of_total
+FROM customer_revenue
+ORDER BY revenue DESC;
+      </code>
+    </div>
+  </section>
+
+  <!-- Findings -->
+  <section>
+    <h3>Key Findings (Insights)</h3>
+    <ul>
+      <li>
+        <strong>Top customer revenue:</strong> QUICK-Stop generated <strong>$110,277.31</strong> (~<strong>8.98%</strong> of total revenue),
+        followed closely by Ernst Handel and Save-a-lot Markets (each &gt;8%).
+      </li>
+      <li>
+        <strong>Revenue concentration:</strong> A small number of customers contribute a meaningful share of revenue, suggesting
+        opportunities for retention and account management strategies.
+      </li>
+      <li>
+        <strong>Repeat customers dominate:</strong> The dataset shows <strong>84 repeat customers</strong> and only <strong>1 one-time customer</strong>,
+        indicating high customer retention (within this sample dataset).
+      </li>
+      <li>
+        <strong>Category performance:</strong> Category-level revenue ranking reveals which product groups drive the business (e.g., Beverages ranked highest).
+      </li>
+      <li>
+        <strong>Monthly trend:</strong> Revenue fluctuates month-to-month with an overall upward pattern across the observed time period,
+        which can help identify seasonality or operational factors impacting sales.
+      </li>
+    </ul>
+
+    <div class="callout">
+      <strong>Business interpretation:</strong>
+      <p style="margin:0.45rem 0 0; color:#cbd5e1;">
+        These results can guide decisions such as prioritizing high-value customers, strengthening relationships with top accounts,
+        and focusing inventory/marketing efforts on the best-performing categories.
+      </p>
+    </div>
+  </section>
+
+  <!-- Visuals -->
+  <section>
+    <h3>Visualizations</h3>
+
+    <div class="screenshot-grid">
+      <div class="screenshot-card">
+        <img src="../images/sql-revenue-by-category.png" alt="Revenue by category table or chart" />
+        <p>Revenue by category (Beverages ranked highest in this dataset).</p>
+      </div>
+
+      <div class="screenshot-card">
+        <img src="../images/sql-top-customers.png" alt="Top customers by revenue table" />
+        <p>Top 10 customers by revenue (QUICK-Stop ranked #1).</p>
+      </div>
+
+      <div class="screenshot-card">
+        <img src="../images/sql-monthly-revenue.png" alt="Monthly revenue trend" />
+        <p>Monthly revenue trend (useful for spotting patterns and seasonality).</p>
+      </div>
+    </div>
+
+    <p style="color:#9ca3af; font-size:0.85rem; margin-top:0.8rem;">
+      Note: The images above are static exports from my Colab notebook. The full interactive version is available in the notebook link at the top of this page.
+    </p>
+  </section>
+
+  <!-- Skills -->
+  <section>
+    <h3>Skills & Tools Applied</h3>
+    <ul>
+      <li><strong>SQL / SQLite:</strong> joins, aggregations, subqueries, CTEs, window functions</li>
+      <li><strong>Analytics:</strong> revenue modeling with discounts, customer ranking, retention-style segmentation</li>
+      <li><strong>Python:</strong> executed SQL via <code>sqlite3</code> and reviewed outputs with Pandas</li>
+      <li><strong>Data storytelling:</strong> translated results into business insights and recommendations</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  © <span id="year"></span> Jenny Hoang
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

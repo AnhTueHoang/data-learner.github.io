@@ -1,6 +1,17 @@
 // Central source of truth for all projects
 const projects = [
   {
+  id: "sql-northwind",
+  title: "🧾 SQL Customer & Order Analysis (Northwind)",
+  url: "projects/project-sql-northwind.html",
+  type: "SQL • Business Analytics",
+  description:
+    "Analyzed customers, orders, and revenue using SQLite with joins, CTEs, and window functions; identified top customers and revenue concentration.",
+  tags: ["SQL", "SQLite", "Joins", "CTEs", "Window Functions"],
+  date: "2025-12-27"
+  },
+
+  {
     id: "retail-forecasting",
     title: "📈 Retail Sales Forecasting with Time Series Analysis",
     url: "projects/project-retail-forecasting.html",
